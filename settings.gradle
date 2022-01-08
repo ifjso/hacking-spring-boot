@@ -1,0 +1,3 @@
+rootProject.name = 'hacking-spring-boot-reactive'
+
+include 'ch1-reactive'

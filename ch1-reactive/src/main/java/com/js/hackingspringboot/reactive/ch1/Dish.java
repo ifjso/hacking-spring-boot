@@ -1,4 +1,4 @@
-package com.js.hackingspringboot.reactive;
+package com.js.hackingspringboot.reactive.ch1;
 
 import lombok.AccessLevel;
 import lombok.Getter;

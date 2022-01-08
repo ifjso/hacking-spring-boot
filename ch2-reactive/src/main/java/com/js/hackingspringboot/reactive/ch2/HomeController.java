@@ -1,4 +1,4 @@
-package com.js.hackingspringboot.reactive;
+package com.js.hackingspringboot.reactive.ch2;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

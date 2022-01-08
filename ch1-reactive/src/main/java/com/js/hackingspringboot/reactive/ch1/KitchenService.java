@@ -1,4 +1,4 @@
-package com.js.hackingspringboot.reactive;
+package com.js.hackingspringboot.reactive.ch1;
 
 import java.time.Duration;
 import java.util.List;

@@ -1,10 +1,14 @@
 package com.js.hackingspringboot.reactive.ch2;
 
 import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Getter
+@ToString
+@EqualsAndHashCode
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CartItem {
 
@@ -14,5 +18,9 @@ public class CartItem {
     public CartItem(Item item) {
         this.item = item;
         this.quantity = 1;
+    }
+
+    public void increment() {
+        this.quantity++;
     }
 }

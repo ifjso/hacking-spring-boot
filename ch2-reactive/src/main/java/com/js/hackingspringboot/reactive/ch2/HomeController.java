@@ -31,27 +31,27 @@ public class HomeController {
     @GetMapping
     Mono<Rendering> home() {
         return Mono.just(Rendering.view("home.html")
-                .modelAttribute("items", this.itemRepository.findAll())
-                .modelAttribute("cart", this.cartRepository.findById("My Cart")
+                .modelAttribute("items", itemRepository.findAll())
+                .modelAttribute("cart", cartRepository.findById("My Cart")
                         .defaultIfEmpty(new Cart("My Cart")))
                 .build());
     }
 
     @PostMapping("/add/{id}")
     Mono<String> addToCart(@PathVariable String id) {
-        return this.cartService.addToCart("My Cart", id)
+        return cartService.addToCart("My Cart", id)
                 .thenReturn("redirect:/");
     }
 
     @PostMapping
     Mono<String> createItem(@ModelAttribute Item newItem) {
-        return this.itemRepository.save(newItem)
+        return itemRepository.save(newItem)
                 .thenReturn("redirect:/");
     }
 
     @DeleteMapping("/delete/{id}")
     Mono<String> deleteItem(@PathVariable String id) {
-        return this.itemRepository.deleteById(id)
+        return itemRepository.deleteById(id)
                 .thenReturn("redirect:/");
     }
 
@@ -60,8 +60,8 @@ public class HomeController {
                            @RequestParam(required = false) String description,
                            @RequestParam boolean useAnd) {
         return Mono.just(Rendering.view("home.html")
-                .modelAttribute("results", this.inventoryService.searchByExample(name, description, useAnd))
-                .modelAttribute("cart", this.cartRepository.findById("My Cart")
+                .modelAttribute("results", inventoryService.searchByExample(name, description, useAnd))
+                .modelAttribute("cart", cartRepository.findById("My Cart")
                         .defaultIfEmpty(new Cart("My Cart")))
                 .build());
     }

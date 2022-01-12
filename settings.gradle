@@ -2,3 +2,4 @@ rootProject.name = 'hacking-spring-boot-reactive'
 
 include 'ch1-reactive'
 include 'ch2-reactive'
+include 'ch3-reactive'

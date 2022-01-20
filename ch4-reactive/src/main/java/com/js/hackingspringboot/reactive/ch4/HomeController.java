@@ -23,7 +23,7 @@ public class HomeController {
         return Mono.just(Rendering.view("home.html")
                 .modelAttribute("items", inventoryService.getInventory())
                 .modelAttribute("cart", inventoryService.getCart("My Cart")
-                        .defaultIfEmpty(new Cart("My Cart")))
+                        .defaultIfEmpty(Cart.empty("My Cart")))
                 .build());
     }
 

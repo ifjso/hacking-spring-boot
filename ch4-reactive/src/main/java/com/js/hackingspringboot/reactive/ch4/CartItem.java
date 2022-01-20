@@ -15,7 +15,7 @@ public class CartItem {
     private Item item;
     private int quantity;
 
-    public CartItem(Item item) {
+    private CartItem(Item item) {
         this.item = item;
         this.quantity = 1;
     }
@@ -26,5 +26,9 @@ public class CartItem {
 
     public void decrement() {
         this.quantity--;
+    }
+
+    public static CartItem from(Item item) {
+        return new CartItem(item);
     }
 }

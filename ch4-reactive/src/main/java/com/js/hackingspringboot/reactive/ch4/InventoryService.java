@@ -34,7 +34,7 @@ class InventoryService {
 
     public Mono<Cart> addItemToCart(String cartId, String itemId) {
         return cartRepository.findById(cartId)
-                .defaultIfEmpty(new Cart(cartId))
+                .defaultIfEmpty(Cart.empty(cartId))
                 .flatMap(cart -> cart.getCartItems().stream()
                         .filter(cartItem -> cartItem.getItem().getId().equals(itemId))
                         .findAny()
@@ -43,7 +43,7 @@ class InventoryService {
                             return Mono.just(cart);
                         })
                         .orElseGet(() -> itemRepository.findById(itemId)
-                                .map(CartItem::new)
+                                .map(CartItem::from)
                                 .map(cartItem -> {
                                     cart.getCartItems().add(cartItem);
                                     return cart;
@@ -54,7 +54,7 @@ class InventoryService {
 
     public Mono<Cart> removeOneFromCart(String cartId, String itemId) {
         return cartRepository.findById(cartId)
-                .defaultIfEmpty(new Cart((cartId)))
+                .defaultIfEmpty(Cart.empty(cartId))
                 .flatMap(cart -> cart.getCartItems().stream()
                         .filter(cartItem -> cartItem.getItem().getId().equals(itemId))
                         .findAny()
@@ -63,7 +63,7 @@ class InventoryService {
                             return Mono.just(cart);
                         })
                         .orElse(Mono.empty()))
-                .map(cart -> new Cart(cart.getId(), cart.getCartItems().stream()
+                .map(cart -> Cart.of(cart.getId(), cart.getCartItems().stream()
                         .filter(cartItem -> cartItem.getQuantity() > 0)
                         .collect(Collectors.toList())))
                 .flatMap(cartRepository::save);

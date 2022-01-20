@@ -1,18 +1,9 @@
 package com.js.hackingspringboot.reactive.ch3;
 
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.data.domain.ExampleMatcher.StringMatcher;
-import org.springframework.data.mongodb.core.ReactiveFluentMongoOperations;
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.util.stream.Collectors;
-
-import static org.springframework.data.mongodb.core.query.Criteria.byExample;
-import static org.springframework.data.mongodb.core.query.Criteria.where;
-import static org.springframework.data.mongodb.core.query.Query.query;
 
 @Service
 class InventoryService {

@@ -1,0 +1,11 @@
+springBoot {
+    buildInfo {
+        properties {
+            additional = [
+                    'java.version': '11',
+                    'spring.framework.version': "${springBootVersion}",
+                    'spring.data.version': "${springBootVersion}"
+            ]
+        }
+    }
+}

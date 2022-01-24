@@ -7,3 +7,29 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - auditevents
+          - beans
+          - caches
+          - conditions
+          - configprops
+          - env
+          - flyway
+          - health
+          - heapdump
+          - httptrace
+          - info
+          - logfile
+          - loggers
+          - metrics
+          - mappings
+          - shutdown
+          - threaddump
+  endpoint:
+    health:
+      show-details: always

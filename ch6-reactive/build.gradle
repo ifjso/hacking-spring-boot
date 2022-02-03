@@ -1,0 +1,20 @@
+plugins {
+    id 'org.asciidoctor.jvm.convert' version '3.3.2'
+}
+
+dependencies {
+    testImplementation 'org.springframework.restdocs:spring-restdocs-webtestclient:2.0.6.RELEASE'
+}
+
+ext {
+    snippetsDir = file('build/generated-snippets')
+}
+
+tasks {
+    asciidoctor {
+        dependsOn test
+
+        attributes 'snippets': snippetsDir
+        inputs.dir snippetsDir
+    }
+}

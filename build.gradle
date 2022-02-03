@@ -9,7 +9,6 @@ buildscript {
     }
 }
 
-
 subprojects {
     group = 'com.js'
     version = '0.0.1-SNAPSHOT'
@@ -37,8 +36,6 @@ subprojects {
 
         testImplementation 'org.junit.platform:junit-platform-launcher'
         testImplementation 'io.projectreactor.tools:blockhound-junit-platform:1.0.6.RELEASE'
-
-        developmentOnly 'org.springframework.boot:spring-boot-devtools'
     }
 
     test {

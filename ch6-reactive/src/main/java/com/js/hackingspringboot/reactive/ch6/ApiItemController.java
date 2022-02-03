@@ -41,7 +41,12 @@ public class ApiItemController {
 
     @PutMapping("/api/items/{id}")
     Mono<ResponseEntity<Item>> updateItem(@RequestBody Mono<Item> item, @PathVariable String id) {
-        return item.map(content -> new Item(id, content.getName(), content.getDescription(), content.getPrice()))
+        return item.map(content -> Item.builder()
+                        .id(id)
+                        .name(content.getName())
+                        .description(content.getDescription())
+                        .price(content.getPrice())
+                        .build())
                 .flatMap(itemRepository::save)
                 .map(ResponseEntity::ok);
     }

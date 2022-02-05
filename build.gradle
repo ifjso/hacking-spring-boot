@@ -33,9 +33,6 @@ subprojects {
 
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         testImplementation 'io.projectreactor:reactor-test'
-
-        testImplementation 'org.junit.platform:junit-platform-launcher'
-        testImplementation 'io.projectreactor.tools:blockhound-junit-platform:1.0.6.RELEASE'
     }
 
     test {

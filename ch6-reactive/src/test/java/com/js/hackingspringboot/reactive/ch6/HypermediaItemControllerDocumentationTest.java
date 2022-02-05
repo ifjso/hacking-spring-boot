@@ -1,6 +1,7 @@
 package com.js.hackingspringboot.reactive.ch6;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.linkWithRel;
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.links;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.hateoas.MediaTypes;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -82,12 +84,13 @@ class HypermediaItemControllerDocumentationTest {
                 .description("nothing I really need")
                 .price(19.99d)
                 .build();
-        given(itemRepository.findById(any(String.class))).willReturn(
+        given(itemRepository.findById(anyString())).willReturn(
                 Mono.just(item));
         given(itemRepository.save(any())).willReturn(
                 Mono.just(item));
 
         webTestClient.post().uri("/hypermedia/items")
+                .contentType(MediaTypes.HAL_JSON)
                 .body(Mono.just(Item.builder()
                         .name("Alf alarm clock")
                         .description("nothing I really need")
@@ -115,6 +118,7 @@ class HypermediaItemControllerDocumentationTest {
                 Mono.just(item));
 
         webTestClient.put().uri("/hypermedia/items/1")
+                .contentType(MediaTypes.HAL_JSON)
                 .bodyValue(item)
                 .exchange()
                 .expectStatus().isNoContent()

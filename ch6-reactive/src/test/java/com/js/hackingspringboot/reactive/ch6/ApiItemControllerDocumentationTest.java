@@ -46,7 +46,6 @@ class ApiItemControllerDocumentationTest {
     @Test
     void postNewItem() {
         Item item = Item.builder()
-                .id("1")
                 .name("Alf alarm clock")
                 .description("nothing important")
                 .price(19.99d)

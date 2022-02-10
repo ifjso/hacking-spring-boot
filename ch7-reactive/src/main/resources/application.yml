@@ -7,3 +7,12 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
+
+logging:
+  level:
+    org.springframework:
+      amqp: DEBUG
+      messaging: DEBUG
+      data: DEBUG
+    reactor: DEBUG
+    com.js.hackingspringboot: DEBUG

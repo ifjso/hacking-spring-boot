@@ -28,6 +28,9 @@ class RabbitTest {
     @Autowired
     private WebTestClient webTestClient;
 
+    @Autowired
+    private ItemRepository itemRepository;
+
     @DynamicPropertySource
     static void configure(DynamicPropertyRegistry registry) {
         registry.add("spring.rabbitmq.host", container::getContainerIpAddress);

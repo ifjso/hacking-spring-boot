@@ -8,6 +8,11 @@ spring:
       filter:
         enabled: true
 
+  rabbitmq:
+    listener:
+      simple:
+        default-requeue-rejected: true
+
 logging:
   level:
     org.springframework:

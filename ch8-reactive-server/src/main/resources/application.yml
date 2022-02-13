@@ -2,11 +2,14 @@ server:
   port: 9000
 
 spring:
-  mongodb:
-    embedded:
-      version: 4.4.9
-
   rsocket:
     server:
       port: 8000
       transport: tcp
+
+logging:
+  level:
+    com.js.hackingspringboot.reactive: DEBUG
+    org.springframework.data: DEBUG
+    reactor: DEBUG
+    io.rsocket: DEBUG

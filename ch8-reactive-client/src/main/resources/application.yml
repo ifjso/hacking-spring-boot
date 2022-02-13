@@ -1,1 +1,6 @@
-
+logging:
+  level:
+    com.js.hackingspringboot.reactive: DEBUG
+    org.springframework.data: DEBUG
+    reactor: DEBUG
+    io.rsocket: DEBUG

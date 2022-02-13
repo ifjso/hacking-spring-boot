@@ -40,12 +40,22 @@ subprojects {
     }
 }
 
-def dataProjects = subprojects.findAll { it.name != 'ch1-reactive' && it.name != 'ch8-reactive-client' }
+def dataProjects = subprojects.findAll { it.name != 'ch1-reactive' }
 
 configure(dataProjects) {
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
+    }
+}
+
+def embedMongoProjects = subprojects.findAll { it.name != 'ch1-reactive'
+        && it.name != 'ch8-reactive-server'
+        && it.name != 'ch8-reactive-client' }
+
+configure(embedMongoProjects) {
+    dependencies {
         implementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:3.2.4'
         implementation 'org.mongodb:mongodb-driver-sync:4.4.0'
     }
 }
+

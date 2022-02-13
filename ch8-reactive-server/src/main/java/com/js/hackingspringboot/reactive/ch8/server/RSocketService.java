@@ -1,12 +1,12 @@
 package com.js.hackingspringboot.reactive.ch8.server;
 
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Controller;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Sinks;
 
-@Service
+@Controller
 public class RSocketService {
 
     private final ItemRepository itemRepository;

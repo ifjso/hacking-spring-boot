@@ -40,7 +40,7 @@ subprojects {
     }
 }
 
-def dataProjects = subprojects.findAll { it.name != 'ch1-reactive' }
+def dataProjects = subprojects.findAll { it.name != 'ch1-reactive' && it.name != 'ch8-reactive-client' }
 
 configure(dataProjects) {
     dependencies {

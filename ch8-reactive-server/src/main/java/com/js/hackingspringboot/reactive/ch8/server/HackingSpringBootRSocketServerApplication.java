@@ -9,5 +9,4 @@ public class HackingSpringBootRSocketServerApplication {
     public static void main(String[] args) {
         SpringApplication.run(HackingSpringBootRSocketServerApplication.class, args);
     }
-
 }

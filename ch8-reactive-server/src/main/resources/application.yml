@@ -1,4 +1,12 @@
+server:
+  port: 9000
+
 spring:
   mongodb:
     embedded:
       version: 4.4.9
+
+  rsocket:
+    server:
+      port: 8000
+      transport: tcp

@@ -19,6 +19,7 @@ public class SpringAmqpItemService {
    }
 
    @RabbitListener(
+           // AbstractAdaptableMessageListener 에서 Mono 완료 또는 에러에 따라 basicAck 또는 basicNack 처리 설정
            ackMode = "MANUAL",
            bindings = @QueueBinding(
                    value = @Queue,

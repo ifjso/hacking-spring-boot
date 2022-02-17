@@ -3,14 +3,18 @@ package com.js.hackingspringboot.reactive.ch8.client;
 
 import static io.rsocket.metadata.WellKnownMimeType.MESSAGE_RSOCKET_ROUTING;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.http.MediaType.APPLICATION_NDJSON_VALUE;
 import static org.springframework.http.MediaType.parseMediaType;
 
 import java.net.URI;
+import java.time.Duration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.rsocket.RSocketRequester;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -39,4 +43,14 @@ public class RSocketController {
                         .created(URI.create("/items/request-response"))
                         .body(savedItem));
     }
+
+    @GetMapping(value = "/items/request-stream", produces = APPLICATION_NDJSON_VALUE)
+    Flux<Item> findItemUsingRSocketRequestStream() {
+        return requester
+                .flatMapMany(rSocketRequester -> rSocketRequester
+                        .route("newItems.request-stream")
+                        .retrieveFlux(Item.class)
+                        .delayElements(Duration.ofSeconds(1L)));
+    }
+
 }

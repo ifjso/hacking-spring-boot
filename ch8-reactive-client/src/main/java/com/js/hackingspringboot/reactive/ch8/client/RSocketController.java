@@ -53,4 +53,15 @@ public class RSocketController {
                         .delayElements(Duration.ofSeconds(1L)));
     }
 
+    @PostMapping("/items/fire-and-forget")
+    Mono<ResponseEntity<?>> addNewItemUsingRSocketFireAndForget(@RequestBody Item item) {
+        return requester
+                .flatMap(rSocketRequester -> rSocketRequester
+                        .route("newItems.fire-and-forget")
+                        .data(item)
+                        .send())
+                .then(Mono.just(
+                        ResponseEntity.created(
+                                URI.create("/items/fire-and-forget")).build()));
+    }
 }

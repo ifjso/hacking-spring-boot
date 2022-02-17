@@ -97,4 +97,34 @@ class RSocketTest {
             return true;
         };
     }
+
+    @Test
+    void verifyRemoteOperationsThroughRSocketFireAndForget() throws InterruptedException {
+        itemRepository.deleteAll()
+                .as(StepVerifier::create)
+                .verifyComplete();
+
+        webTestClient.post().uri("/items/fire-and-forget")
+                .bodyValue(Item.builder()
+                        .name("Alf alarm clock")
+                        .description("nothing important")
+                        .price(19.99d)
+                        .build())
+                .exchange()
+                .expectStatus().isCreated()
+                .expectBody().isEmpty();
+
+        Thread.sleep(500L);
+
+        itemRepository.findAll()
+                .as(StepVerifier::create)
+                .expectNextMatches(item -> {
+                    assertThat(item.getId()).isNotNull();
+                    assertThat(item.getName()).isEqualTo("Alf alarm clock");
+                    assertThat(item.getDescription()).isEqualTo("nothing important");
+                    assertThat(item.getPrice()).isEqualTo(19.99d);
+                    return true;
+                })
+                .verifyComplete();
+    }
 }

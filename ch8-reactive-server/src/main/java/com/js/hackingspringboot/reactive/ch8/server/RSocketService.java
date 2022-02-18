@@ -14,7 +14,10 @@ public class RSocketService {
 
     public RSocketService(ItemRepository itemRepository) {
         this.itemRepository = itemRepository;
-        this.itemSink = Sinks.many().multicast().onBackpressureBuffer();
+
+        // multicast (EmitterProcessor) backpressure buffer size 는 특정 수 (1, 8, 16, 32 ...) 로 동작하는 것 같다.
+        // replay (ReplayProcessor) 는 설정한 history size 만큼 정확히 동작한다.
+        this.itemSink = Sinks.many().multicast().onBackpressureBuffer(8, false);
     }
 
     @MessageMapping("newItems.request-response")
@@ -38,6 +41,9 @@ public class RSocketService {
 
     @MessageMapping("newItems.monitor")
     public Flux<Item> monitorNewItems() {
-        return itemSink.asFlux();
+        return itemSink.asFlux()
+                .doOnRequest(l -> System.out.println(l))
+                .doOnCancel(() -> System.out.println("cancel"))
+                .doOnComplete(() -> System.out.println("complete"));
     }
 }

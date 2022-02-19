@@ -13,3 +13,5 @@ include 'ch9-reactive-quick'
 include 'ch9-reactive-repository'
 include 'ch9-reactive-custom-config'
 include 'ch9-reactive-method-security'
+include 'ch9-reactive-oauth'
+
